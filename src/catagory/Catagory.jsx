@@ -1,10 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-export default function Catagory(props) {
+export default function Catagory() {
     const [catagoryname, setCatagoryname] = useState('');
     const [description, setDescription] = useState('');
     const navigate=useNavigate()
@@ -19,8 +19,8 @@ export default function Catagory(props) {
             const response = await axios.post('http://localhost:8000/qrcatagories', data);
             console.log(response);
             toast.success('Category added successfully!');
-           setTimeout((e)=>{
-            navigate('/subcatagory');
+           setTimeout(()=>{
+            navigate('/subcategories');
             },3000)
         } catch (error) {
             toast.error('Failed to add category!');
@@ -30,9 +30,9 @@ export default function Catagory(props) {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center'>
+            <form onSubmit={handleSubmit} className='w-100'>
                 <div className="form-group">
-                    <label htmlFor="catagoryNameInput" className='text-white'>Name Catagory</label>
+                    <label htmlFor="catagoryNameInput" className='text-dark'>Name Catagory</label>
                     <input
                         type="text"
                         className="form-control"
@@ -43,7 +43,7 @@ export default function Catagory(props) {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="descriptionInput" className='text-white text-left'>Description</label>
+                    <label htmlFor="descriptionInput" className='text-dark text-left'>Description</label>
                     <input
                         type="text"
                         className="form-control"
@@ -53,24 +53,11 @@ export default function Catagory(props) {
                         onChange={(e) => { setDescription(e.target.value) }}
                     />
                 </div>
-                <button type="submit" className="animated-button1">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <div className="text-size-sm">Add Catagory</div>
+                <button type="submit" className='btn btn-success mt-3'>
+                    Add Catagory
                 </button>
             </form>
             <ToastContainer />
-            <div className='row'>
-                <Link to="/" className="animated-button1">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <div className="text-size-sm">Home</div>    
-                </Link>
-            </div>
         </>
     );
 }
